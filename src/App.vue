@@ -1,12 +1,7 @@
 <template>
   <div id="app">
-    <!-- Menu Lateral -->
-    <div>
-      <MenuLateral v-if="estaAutenticado" />
-    </div>
-
     <!-- Conteúdo da Página -->
-    <div class="content transition-transform duration-300 ease-in-out">
+    <div class="content">
       <router-view />
     </div>
   </div>
@@ -15,14 +10,11 @@
 <script>
 import { computed } from 'vue'
 import { useAuthStore } from '@/stores/authStore.js'
-import MenuLateral from '../src/components/MenuLateral/MenuLateral.vue'
 import { useRoute } from 'vue-router'
 
 export default {
   name: 'App',
-  components: {
-    MenuLateral,
-  },
+  components: {},
   setup() {
     const authStore = useAuthStore()
     const route = useRoute()
@@ -42,6 +34,7 @@ export default {
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 #app {
@@ -49,13 +42,7 @@ body {
 }
 
 .content {
-  flex-grow: 1;
-  margin-left: 0; /* Inicialmente sem margem */
-  transition: margin-left 0.3s ease; /* Transição suave para o deslocamento */
-}
-
-/* Quando o menu estiver aberto, desloque o conteúdo para a direita */
-.menu-lateral.active ~ .content {
-  margin-left: 250px; /* Largura do menu lateral */
+  width: 100%;
+  height: 100vh;
 }
 </style>

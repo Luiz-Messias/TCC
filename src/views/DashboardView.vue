@@ -1,13 +1,135 @@
 <template>
-  <div class="dashboard-container flex min-h-screen bg-gray-50">
-    <!-- <MenuLateral /> -->
-    <div class="flex-1 flex flex-col">
-      <h1 class="text-2xl font-bold mb-8 mt-8 ml-8">Bem-vindo ao Arcca Bebidas</h1>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-8">
-        <button v-for="acao in acoes" :key="acao.rotulo" class="dashboard-action">
-          <i :class="acao.icone + ' mr-2'" style="width: 20px; text-align: center"></i>
-          {{ acao.rotulo }}
-        </button>
+  <div class="flex min-h-screen bg-gray-50">
+    <!-- Menu Lateral -->
+    <div class="w-64 bg-white shadow-lg">
+      <div class="p-6">
+        <h2 class="text-lg font-semibold text-gray-800">Arcca Bebidas</h2>
+      </div>
+      <nav class="mt-6">
+        <ul class="space-y-2">
+          <li>
+            <a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
+              <i class="fas fa-box mr-3"></i>
+              Produtos
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
+              <i class="fas fa-users mr-3"></i>
+              Clientes
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
+              <i class="fas fa-shopping-cart mr-3"></i>
+              Pedidos
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
+              <i class="fas fa-chart-bar mr-3"></i>
+              Relatórios
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
+              <i class="fas fa-undo mr-3"></i>
+              Devoluções
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
+              <i class="fas fa-tags mr-3"></i>
+              Estoque
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div class="flex-1 p-8">
+      <h1 class="text-2xl font-bold text-gray-800 mb-8">Bem-vindo ao Arcca Bebidas</h1>
+      
+      <!-- Grid de Ações -->
+      <div class="grid grid-cols-3 gap-6">
+        <!-- Realizar Pedido -->
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+              <i class="fas fa-plus text-blue-600 text-xl"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-800">Realizar</h3>
+              <p class="text-sm text-gray-600">Pedido</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Devolução de Produtos -->
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+              <i class="fas fa-undo text-green-600 text-xl"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-800">Devolução</h3>
+              <p class="text-sm text-gray-600">de Produtos</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Converter Unidades -->
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+              <i class="fas fa-exchange-alt text-purple-600 text-xl"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-800">Converter</h3>
+              <p class="text-sm text-gray-600">Unidades</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cancelar Pedido -->
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
+              <i class="fas fa-times text-red-600 text-xl"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-800">Cancelar</h3>
+              <p class="text-sm text-gray-600">Pedido</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Atualizar Preço -->
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mr-4">
+              <i class="fas fa-dollar-sign text-yellow-600 text-xl"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-800">Atualizar</h3>
+              <p class="text-sm text-gray-600">Preço</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calcular Impostos -->
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mr-4">
+              <i class="fas fa-calculator text-indigo-600 text-xl"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-800">Calcular</h3>
+              <p class="text-sm text-gray-600">Impostos</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -16,44 +138,5 @@
 <script src="./DashboardView.js"></script>
 
 <style scoped>
-.dashboard-container {
-  min-height: 100vh;
-}
-.sidebar {
-  min-height: 100vh;
-}
-.sidebar-btn {
-  display: flex;
-  align-items: center;
-  padding: 0.75rem 1rem;
-  border-radius: 0.75rem;
-  font-size: 1rem;
-  color: #222;
-  background: none;
-  transition: background 0.2s;
-  width: 100%;
-  text-align: left;
-}
-.sidebar-btn:hover {
-  background: #f3f4f6;
-}
-.dashboard-action {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 1.25rem 1rem;
-  border-radius: 1rem;
-  background: #fff;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.04);
-  font-weight: 500;
-  font-size: 1rem;
-  transition:
-    box-shadow 0.2s,
-    background 0.2s;
-  border: 1px solid #f3f4f6;
-}
-.dashboard-action:hover {
-  background: #f3f4f6;
-  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.06);
-}
+/* Estilos específicos se necessário */
 </style>
