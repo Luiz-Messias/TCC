@@ -49,3 +49,4 @@ build/
 output.json
 local.properties
 google-services.json
+.env
