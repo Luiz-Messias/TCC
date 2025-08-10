@@ -10,7 +10,7 @@
 - Código deve ser comentado, legível e seguir princípios de **Clean Code**.
 - Use **Tailwind CSS** para estilização, mantendo design limpo, moderno e responsivo.
 - Gerencie estado local via Composition API ou Pinia/Vuex conforme necessidade.
-- Sempre utilize ícones Font Awesome (`fas fa`) em todos os componentes e telas.
+- Sempre utilize ícones Font Awesome (`fas fa-nomeIcone`) em todos os componentes e telas.
 
 ## Estrutura Funcional do Sistema
 
@@ -134,3 +134,21 @@ export default {
 
 <script src="./Exemplo.js"></script>
 ```
+
+-- Estrutura e Organização de Arquivos
+-- Cada view ou componente deve ficar dentro de uma pasta com o mesmo nome.
+
+-- Dentro da pasta, criar dois arquivos:
+
+-- NomeDoComponente.vue → somente template e import do JS.
+
+-- NomeDoComponente.js → somente lógica JS.
+
+Exemplo:
+
+-- /src/views/Pedidos/
+Pedidos.vue
+Pedidos.js
+/src/components/BotaoLogin/
+BotaoLogin.vue
+BotaoLogin.js

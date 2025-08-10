@@ -1,7 +1,9 @@
 <template>
-  <div id="app">
-    <!-- Conteúdo da Página -->
-    <div class="content">
+  <div id="app" class="min-h-screen flex bg-gray-50">
+    <!-- Menu lateral fixo -->
+    <MenuLateral v-if="estaAutenticado" />
+    <!-- Conteúdo principal -->
+    <div class="flex-1 min-h-screen ml-0 md:ml-0">
       <router-view />
     </div>
   </div>
@@ -11,10 +13,11 @@
 import { computed } from 'vue'
 import { useAuthStore } from '@/stores/authStore.js'
 import { useRoute } from 'vue-router'
+import MenuLateral from './components/MenuLateral/MenuLateral.vue'
 
 export default {
   name: 'App',
-  components: {},
+  components: { MenuLateral },
   setup() {
     const authStore = useAuthStore()
     const route = useRoute()

@@ -3,6 +3,7 @@ import { useAuthStore } from '@/stores/authStore.js'
 import SplashScreen from '@/components/SplashScreen.vue'
 import Login from '@/views/Login/LoginView.vue'
 import DashboardView from '@/views/DashboardView.vue'
+import PedidoView from '@/views/Pedido/PedidoView.vue'
 
 const routes = [
   {
@@ -19,6 +20,12 @@ const routes = [
     path: '/home',
     name: 'Dashboard',
     component: DashboardView,
+    //meta: { requiresAuth: true },
+  },
+  {
+    path: '/pedido/novo',
+    name: 'NovoPedido',
+    component: PedidoView,
     //meta: { requiresAuth: true },
   },
 ]
