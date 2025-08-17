@@ -25,14 +25,15 @@ export default {
         localStorage.removeItem('keepConnectedEmail')
         localStorage.removeItem('keepConnectedPassword')
       }
-      // const success = await authStore.login({
-      //   email: email.value,
-      //   password: password.value,
-      //   keepConnected: keepConnected.value,
-      // })
-      const success = true
+
+      const success = await authStore.login({
+        email: email.value,
+        password: password.value,
+        manterConectado: keepConnected.value,
+      })
+
       if (success) {
-        router.push('/home') // Redireciona após login
+        router.push('/home')
       }
     }
 

@@ -1,6 +1,6 @@
 <template>
   <div class="w-60 border-r-2 shadow-lg h-full min-h-screen flex flex-col">
-    <h2 class="flex justify-center">
+    <h2 class="flex justify-center cursor-pointer">
       <router-link to="/home">
         <img
           src="@/assets/logo-preto-branco.png"

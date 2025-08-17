@@ -1,10 +1,8 @@
 <template>
-  <div class="flex flex-col min-h-screen bg-gray-50">
+  <div class="w-full flex flex-col min-h-screen">
     <div class="flex-1 flex flex-col items-center justify-start py-10 px-4">
-      <div class="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8">
-        <h1 class="text-2xl font-bold mb-6 flex items-center gap-2">
-          <i class="fas fa-plus"></i> Novo Pedido
-        </h1>
+      <div class="w-full bg-white rounded-2xl shadow-lg p-8">
+        <h1 class="text-2xl font-bold mb-6 flex items-center gap-2">Novo Pedido</h1>
         <form @submit.prevent="salvarPedido" class="space-y-6">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -38,16 +36,18 @@
             <label class="block text-gray-700 mb-1 font-medium" for="produtos">
               <i class="fas fa-boxes mr-1"></i> Produtos
             </label>
-            <div class="space-y-2">
-              <div v-for="(item, idx) in itens" :key="idx" class="flex gap-2 items-center">
-                <select
-                  v-model="item.produtoId"
-                  class="w-full flex-1 rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
-                  required
-                >
-                  <option value="" disabled>Selecione o produto</option>
-                  <option v-for="p in produtos" :key="p.id" :value="p.id">{{ p.nome }}</option>
-                </select>
+            <SeletorProduto
+              :produtos="produtos"
+              v-model="produtosSelecionados"
+              @selecionados="atualizarItensSelecionados"
+            />
+            <div v-if="produtosSelecionados.length > 0" class="mt-4 space-y-2">
+              <div
+                v-for="(item, idx) in produtosSelecionados"
+                :key="item.id"
+                class="flex gap-2 items-center"
+              >
+                <span class="flex-1 font-medium">#{{ item.id }} - {{ item.nome }}</span>
                 <input
                   v-model.number="item.quantidade"
                   type="number"
@@ -58,19 +58,12 @@
                 />
                 <button
                   type="button"
-                  @click="removerItem(idx)"
+                  @click="removerProdutoSelecionado(idx)"
                   class="text-red-500 hover:text-red-700"
                 >
                   <i class="fas fa-trash"></i>
                 </button>
               </div>
-              <button
-                type="button"
-                @click="adicionarItem"
-                class="text-blue-600 hover:underline flex items-center gap-1 mt-2"
-              >
-                <i class="fas fa-plus"></i> Adicionar Produto
-              </button>
             </div>
           </div>
           <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">

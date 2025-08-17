@@ -1,7 +1,11 @@
 import { ref, computed } from 'vue'
+import SeletorProduto from '@/components/SeletorProduto/SeletorProduto.vue'
 
 export default {
   name: 'PedidoView',
+  components: {
+    SeletorProduto,
+  },
   setup() {
     // Dados simulados para clientes e produtos
     const clientes = ref([
@@ -14,6 +18,8 @@ export default {
       { id: 2, nome: 'Refrigerante 2L', preco: 7.0 },
       { id: 3, nome: 'Água Mineral', preco: 3.5 },
     ])
+
+    const produtosSelecionados = ref([])
 
     // Formulário
     const cliente = ref('')
@@ -59,6 +65,7 @@ export default {
       data,
       itens,
       totalPedido,
+      produtosSelecionados,
       adicionarItem,
       removerItem,
       limparFormulario,

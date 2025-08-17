@@ -20,13 +20,13 @@ const routes = [
     path: '/home',
     name: 'Dashboard',
     component: DashboardView,
-    //meta: { requiresAuth: true },
+    meta: { requiresAuth: true },
   },
   {
     path: '/pedido/novo',
     name: 'NovoPedido',
     component: PedidoView,
-    //meta: { requiresAuth: true },
+    meta: { requiresAuth: true },
   },
 ]
 
@@ -35,14 +35,12 @@ const router = createRouter({
   routes,
 })
 
-// 🔥 Middleware de autenticação
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
-
-  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-    next('/login') // Redireciona para login se não estiver autenticado
+  if (to.meta.requiresAuth && !authStore.estaAutenticado) {
+    next('/login')
   } else if (to.meta.role && authStore.role !== to.meta.role) {
-    next('/home') // Se não for admin, redireciona para home
+    next('/home')
   } else {
     next()
   }

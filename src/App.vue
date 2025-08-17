@@ -1,10 +1,10 @@
 <template>
   <div id="app" class="min-h-screen flex bg-gray-50">
-    <!-- Menu lateral fixo -->
     <MenuLateral v-if="estaAutenticado" />
-    <!-- Conteúdo principal -->
     <div class="flex-1 min-h-screen ml-0 md:ml-0">
-      <router-view />
+      <transition name="fade" mode="out-in">
+        <router-view />
+      </transition>
     </div>
   </div>
 </template>
@@ -23,7 +23,8 @@ export default {
     const route = useRoute()
 
     const estaAutenticado = computed(() => {
-      return true || (authStore.isAuthenticated && route.path !== '/login')
+      // Não exibe o menu lateral nas rotas de login e splash
+      return authStore.estaAutenticado && route.path !== '/login' && route.path !== '/'
     })
 
     return {

@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useAuthStore } from '@/stores/authStore'
 
 const api = axios.create({
-  baseURL: 'https://localhost:5000/api',
+  baseURL: 'https://localhost:44347/api',
 })
 
 // Intercepta cada requisição e adiciona o token

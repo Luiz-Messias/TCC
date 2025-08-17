@@ -1,55 +1,66 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import axios from 'axios'
+import api from '@/api/axiosConfig'
+
+import { toast } from 'vue3-toastify'
+import { parseApiError } from '@/utils/parseApiError'
 
 // Store de autenticação do sistema de gestão de bebidas
 export const useAuthStore = defineStore('auth', () => {
-  // Token e papel do usuário
   const token = ref(localStorage.getItem('token') || '')
-  const papel = ref(localStorage.getItem('papel') || 'User')
+  const role = ref(localStorage.getItem('role') || 'User')
 
-  // Computed para saber se está autenticado
   const estaAutenticado = computed(() => !!token.value)
 
-  // Função para login
-  const login = async ({ email, senha, manterConectado }) => {
+  const login = async ({ email, password, manterConectado }) => {
     try {
-  // Chamada à API de autenticação
-      const resposta = await axios.post('https://localhost:7143/api/Token/LoginUser', {
+      const resposta = await api.post('Token/LoginUser', {
         email,
-        senha,
+        password,
       })
-      token.value = resposta.data.token
-      papel.value = resposta.data.papel || 'User'
 
-      // Salva token conforme "manter conectado"
+      token.value = resposta.data.data.token
+      if (token.value) {
+        try {
+          const payload = JSON.parse(atob(token.value.split('.')[1]))
+          role.value =
+            payload.role ||
+            payload.Role ||
+            payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] ||
+            'User'
+        } catch (e) {
+          role.value = 'User'
+        }
+      }
+
       if (manterConectado) {
         localStorage.setItem('token', token.value)
-        localStorage.setItem('papel', papel.value)
+        localStorage.setItem('role', role.value)
         sessionStorage.removeItem('token')
-        sessionStorage.removeItem('papel')
+        sessionStorage.removeItem('role')
       } else {
         sessionStorage.setItem('token', token.value)
-        sessionStorage.setItem('papel', papel.value)
+        sessionStorage.setItem('role', role.value)
         localStorage.removeItem('token')
-        localStorage.removeItem('papel')
+        localStorage.removeItem('role')
       }
+
       return true
     } catch (erro) {
-  // Tratamento de erro
+      const mensagem = parseApiError(erro)
+      toast.error(mensagem)
       return false
     }
   }
 
-  // Função para logout
   const logout = () => {
     token.value = ''
-    papel.value = 'User'
+    role.value = 'User'
     localStorage.removeItem('token')
-    localStorage.removeItem('papel')
+    localStorage.removeItem('role')
     sessionStorage.removeItem('token')
-    sessionStorage.removeItem('papel')
+    sessionStorage.removeItem('role')
   }
 
-  return { token, papel, estaAutenticado, login, logout }
+  return { token, role, estaAutenticado, login, logout }
 })
