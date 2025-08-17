@@ -4,6 +4,8 @@ import SplashScreen from '@/components/SplashScreen.vue'
 import Login from '@/views/Login/LoginView.vue'
 import DashboardView from '@/views/DashboardView.vue'
 import PedidoView from '@/views/Pedido/PedidoView.vue'
+import ProdutoView from '@/views/Produto/ProdutoView.vue'
+import CategoriaView from '@/views/Categoria/CategoriaView.vue'
 
 const routes = [
   {
@@ -26,6 +28,18 @@ const routes = [
     path: '/pedido/novo',
     name: 'NovoPedido',
     component: PedidoView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/produtos',
+    name: 'Produtos',
+    component: ProdutoView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/categorias',
+    name: 'Categorias',
+    component: CategoriaView,
     meta: { requiresAuth: true },
   },
 ]
